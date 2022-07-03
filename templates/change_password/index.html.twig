@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Changement de mot de passe{% endblock %}
+
+{% block body %}
+    <form method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Changez de mot de passe</h1>
+        <label for="inputNewPassword">Nouveau mot de passe</label>
+        <input type="password" name="newPassword" id="inputNewPassword" class="form-control" autocomplete="new-password" required autofocus>
+        <br>
+        <br>
+        <label for="inputNewPasswordConfirmation">Confirmation du mot de passe</label>
+        <input type="password" name="newPasswordConfirmation" id="inputNewPasswordConfirmation" class="form-control" autocomplete="new-password-confirmation" required autofocus>
+        <br>
+        <br>
+
+        <button class="btn btn-lg btn-primary" name="testbtn" type="submit">
+            Changer le mot de passe
+        </button>
+    </form>
+{% endblock %}
