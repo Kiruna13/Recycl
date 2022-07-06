@@ -3,19 +3,147 @@
 {% block title %}Changement de mot de passe{% endblock %}
 
 {% block body %}
-    <form method="post">
-        <h1 class="h3 mb-3 font-weight-normal">Changez de mot de passe</h1>
-        <label for="inputNewPassword">Nouveau mot de passe</label>
-        <input type="password" name="newPassword" id="inputNewPassword" class="form-control" autocomplete="new-password" required autofocus>
-        <br>
-        <br>
-        <label for="inputNewPasswordConfirmation">Confirmation du mot de passe</label>
-        <input type="password" name="newPasswordConfirmation" id="inputNewPasswordConfirmation" class="form-control" autocomplete="new-password-confirmation" required autofocus>
-        <br>
-        <br>
+    <style>
+        body{
+            font-family: Roboto, serif;
+        }
+        .container{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+        .content{
+            background-color: #1A2226;
+            height:auto;
+            padding:50px;
+            border-right: 10px;
+            border-radius: 10px;
+        }
+        .titre{
+            font-size: 25px;
+            color:white;
+            text-align: center;
+        }
+        input{
+            background-color: #1A2226;
+            border: none;
+            border-bottom: 2px solid #0DB8DE;
+            border-top: 0px;
+            border-radius: 0px;
+            font-weight: bold;
+            outline: 0;
+            margin-bottom: 20px;
+            padding-left: 0px;
+            color:white;
+        }
 
-        <button class="btn btn-lg btn-primary" name="testbtn" type="submit">
-            Changer le mot de passe
-        </button>
+        .form-control-label {
+            font-size: 10px;
+            color: #6C6C6C;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .group{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .formgroup{
+            display: flex;
+            flex-direction: column;
+            padding:20px;
+        }
+        .formgroupButton{
+            display: flex;
+        }
+        .button{
+            margin:auto;
+            width:10vw;
+            background-color: transparent;
+            border: none;
+
+        }
+        a{
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #0DB8DE;
+            color: #0DB8DE;
+            text-decoration: none;
+            font-weight:600;
+            font-size: 15px;
+            cursor:pointer;
+
+        }
+        a:before{
+            content: '';
+            position: absolute;
+            top:6px;
+            left:-2px;
+            width: calc(100% + 5px);
+            height: calc(100% - 12px);
+            background: #1A2226;
+            transition: 0.5s ease-in-out;
+            transform: scaleY(1);
+        }
+        a:hover:before{
+            transform: scaleY(0);
+        }
+        a:after{
+            content: '';
+            position: absolute;
+            left:6px;
+            top:-2px;
+            height: calc(100% + 5px);
+            width: calc(100% - 12px);
+            background: #1A2226;
+            transition: 0.5s ease-in-out;
+            transform: scaleX(1);
+        }
+        a:hover:after{
+            transform: scaleX(0);
+        }
+        a span{
+            position: relative;
+            z-index: 3;
+        }
+        body{
+            margin:0;
+        }
+
+    </style>
+
+    <form method="post">
+
+        <div class="container">
+            <div class="content">
+                <h1 class="titre">Changez votre mot de passe</h1>
+                <div class="group">
+                    <div class="formgroup">
+                        <label class="form-control-label" for="inputNewPassword">NOUVEAU MOT DE PASSE</label>
+                        <input type="password" name="newPassword" id="inputNewPassword" class="form-control" autocomplete="new-password" required autofocus>
+                    </div>
+                    <div class="formgroup">
+                        <label class="form-control-label" for="inputNewPasswordConfirmation">CONFIRMATION DU MOT DE PASSE</label>
+                        <input type="password" name="newPasswordConfirmation" id="inputNewPasswordConfirmation" class="form-control" autocomplete="new-password-confirmation" required autofocus>
+                    </div>
+                </div>
+                <div class="formgroupButton">
+                    <button class="button" name="testbtn" type="submit" value="valider"><a><span>VALIDER</span></a></button>
+                </div>
+
+            </div>
+        </div>
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+
     </form>
+
+
+
+
+
 {% endblock %}

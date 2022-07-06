@@ -3,29 +3,155 @@
 {% block title %}Log in{% endblock %}
 
 {% block body %}
+<style>
+    body{
+        font-family: Roboto, serif;
+    }
+    .container{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+    .content{
+        background-color: #1A2226;
+        height:auto;
+        padding:50px;
+        border-right: 10px;
+        border-radius: 10px;
+    }
+    .titre{
+        font-size: 25px;
+        color:white;
+        text-align: center;
+    }
+    input{
+        background-color: #1A2226;
+        border: none;
+        border-bottom: 2px solid #0DB8DE;
+        border-top: 0px;
+        border-radius: 0px;
+        font-weight: bold;
+        outline: 0;
+        margin-bottom: 20px;
+        padding-left: 0px;
+        color:white;
+    }
+
+    .form-control-label {
+        font-size: 10px;
+        color: #6C6C6C;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+    .group{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .formgroup{
+        display: flex;
+        flex-direction: column;
+        padding:20px;
+    }
+    .formgroupButton{
+        display: flex;
+    }
+    .button{
+        margin:auto;
+        width:10vw;
+        background-color: transparent;
+        border: none;
+
+    }
+    a{
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        border: 2px solid #0DB8DE;
+        color: #0DB8DE;
+        text-decoration: none;
+        font-weight:600;
+        font-size: 15px;
+        cursor:pointer;
+
+    }
+    a:before{
+        content: '';
+        position: absolute;
+        top:6px;
+        left:-2px;
+        width: calc(100% + 5px);
+        height: calc(100% - 12px);
+        background: #1A2226;
+        transition: 0.5s ease-in-out;
+        transform: scaleY(1);
+    }
+    a:hover:before{
+        transform: scaleY(0);
+    }
+    a:after{
+        content: '';
+        position: absolute;
+        left:6px;
+        top:-2px;
+        height: calc(100% + 5px);
+        width: calc(100% - 12px);
+        background: #1A2226;
+        transition: 0.5s ease-in-out;
+        transform: scaleX(1);
+    }
+    a:hover:after{
+        transform: scaleX(0);
+    }
+    a span{
+        position: relative;
+        z-index: 3;
+    }
+    body{
+        margin:0;
+    }
+
+</style>
+
 <form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+{#    {% if error %}#}
+{#        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+{#    {% endif %}#}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+{#    {% if app.user %}#}
+{#        <div class="mb-3">#}
+{#            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>#}
+{#        </div>#}
+{#    {% endif %}#}
+
+
+    <div class="container">
+        <div class="content">
+            <h1 class="titre">Connectez-vous</h1>
+            <div class="group">
+                <div class="formgroup">
+                    <label class="form-control-label" for="inputUsername">IDENTIFIANT</label>
+                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+                </div>
+                <div class="formgroup">
+                    <label class="form-control-label" for="inputPassword">MOT DE PASSE</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                </div>
+            </div>
+            <div class="formgroupButton">
+                <button class="button" type="submit" value="valider"><a><span>VALIDER</span></a></button>
+            </div>
+
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
+    </div>
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+
+
+
 </form>
 {% endblock %}

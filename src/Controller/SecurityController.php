@@ -31,10 +31,11 @@ class SecurityController extends AbstractController
 
         $today = $date = new \DateTime('@'.strtotime('now'));
 
-        if ($this->getUser() && $this->getUser()->getLastPasswordChange() == null || intval(date_diff($this->getUser()->getLastPasswordChange(), $today)->format('%m')) >= 2) {
-            return $this->redirectToRoute('change_password');
+        if ($this->getUser()){
+            if($this->getUser()->getLastPasswordChange() == null || intval(date_diff($this->getUser()->getLastPasswordChange(), $today)->format('%m')) >= 2){
+                return $this->redirectToRoute('change_password');
+            }
         }
-
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
